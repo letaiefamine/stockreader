@@ -1,0 +1,25 @@
+
+{% extends "base.html" %}
+{% block title %}Stock{% endblock %}
+
+{% block content %}
+<h3>Stock Reading</h3>
+<div class="container">
+    <table class="table">
+        <thead>
+            <tr>
+              <th scope="col">id</th>
+              <th scope="col">Nom</th>
+              <th scope="col">Date d'expiration</th>
+            </tr>
+        </thead>
+         {% for stock in sotcks %}
+        <tr>
+            <td>{{ stock.referenceId}}</td>
+            <td>{{ stock.nom}}</td>
+            <td>{{ stock.expiryDate}}</td>
+        </tr>
+        {% endfor %}
+    </table>
+</div>
+{% endblock %}
