@@ -13,11 +13,11 @@
               <th scope="col">Date d'expiration</th>
             </tr>
         </thead>
-         {% for stock in sotcks %}
+         {% for article in articles %}
         <tr>
-            <td>{{ stock.referenceId}}</td>
-            <td>{{ stock.nom}}</td>
-            <td>{{ stock.expiryDate}}</td>
+            <td>{{ article.referenceId}}</td>
+            <td>{{ article.nom}}</td>
+            <td>{{ article.expiryDate}}</td>
         </tr>
         {% endfor %}
     </table>

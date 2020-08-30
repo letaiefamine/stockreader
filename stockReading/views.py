@@ -1,6 +1,6 @@
 from django.shortcuts import render
 
-from .forms import stockReaderForm,ExpiryDateForm
+from .forms import stockReaderForm, ExpiryDateForm
 from .models import article, articleExpiryDates
 
 
@@ -21,22 +21,14 @@ def addExpiryDate(request):
     form = ExpiryDateForm()
     return render(request, "addexpirydate.html", {'form': form})
 
+
 def stock_list(request):
-    bcp = article.objects.all()
-    # date = articleExpiryDates.objects.all()
-    # print(date[1].expiryDate)
-    date = articleExpiryDates.objects.select_related('referenceId')
-    print(date)
-    # for elmt in bcp:
-    # #     date = articleExpiryDates.objects.filter(referenceId=elmt.referenceId)
-    # #     print(date)
-    # #     date = articleExpiryDates.objects.filter
-    #     date = articleExpiryDates.objects.select_related('referenceId').filter(elmt.referenceId)
-    #     print(date[1].expiryDate)
-    # #     for elem in date:
-    # #         print(elem.referenceId)
-    context = {"sotcks": bcp,"dates" : date}
-    return render(request, 'stock.html', context)
+    arts = article.objects.all()
+    articles = list()
+    for j in arts:
+        expirydates = articleExpiryDates.objects.order_by('expiryDate').filter(referenceId=str(j.referenceId))
+        articles.append({'referenceId': j.referenceId, 'nom': j.nom, 'expiryDate': expirydates[0].expiryDate})
+    return render(request, 'stock.html', {"articles": articles})
 
 
 def index(request):
